@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20180212095506) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.integer "products_count"
@@ -23,6 +26,13 @@ ActiveRecord::Schema.define(version: 20180212095506) do
     t.string "name"
     t.float "price"
     t.integer "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "questions", id: :serial, force: :cascade do |t|
+    t.string "title"
+    t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

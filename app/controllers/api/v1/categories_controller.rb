@@ -1,18 +1,17 @@
 
 class Api::V1::CategoriesController < ApplicationController
-
   def index
     @categories = Category.all
-    render :index, head: 200
+    render :index, status: 200
   end
 
   def create
     @category = Category.new(category_params)
     @category.products_count = 0
     if @category.save
-      render json: @category, head: 201
+      render :create, status: 201
     else
-      render json: { errors: @category.errors }, head: 422
+      render json: { errors: @category.errors }, status: 422
     end
   end
 
@@ -20,4 +19,3 @@ class Api::V1::CategoriesController < ApplicationController
     params.require(:category).permit(:name)
   end
 end
-
